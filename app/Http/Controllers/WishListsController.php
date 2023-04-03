@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WishList;
 use Illuminate\Http\Request;
 
-class ListsController extends Controller
+class WishListsController extends Controller
 {
     public function index()
     {

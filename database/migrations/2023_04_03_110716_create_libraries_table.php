@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('url')->nullable();
-            // add any other fields you want here
             $table->timestamps();
         });
     }

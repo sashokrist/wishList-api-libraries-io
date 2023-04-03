@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('list_library', function (Blueprint $table) {
+        Schema::create('library_wish_list', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('list_id');
+            $table->unsignedBigInteger('wish_list_id');
             $table->unsignedBigInteger('library_id');
             $table->timestamps();
 
-            $table->foreign('list_id')->references('id')->on('lists')->onDelete('cascade');
+            $table->foreign('wish_list_id')->references('id')->on('wish_lists')->onDelete('cascade');
             $table->foreign('library_id')->references('id')->on('libraries')->onDelete('cascade');
         });
     }

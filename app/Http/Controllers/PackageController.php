@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
-    public function show($name, LibrariesIoService $librariesIoService)
+    public function show(LibrariesIoService $librariesIoService)
     {
-        $package = $librariesIoService->getPackage($name);
+        $package = $librariesIoService->getPackage('wishList-api-libraries.io');
+        dd($package);
 
         return view('packages.show', compact('package'));
     }

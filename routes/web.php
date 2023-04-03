@@ -25,16 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/deactivate-account', [UserController::class, 'deactivateAccount'])->name('deactivate-account');
 
-// Display the "My Lists" page
-Route::get('/lists', [ListsController::class, 'index'])->name('lists.index');
-
-// Display the form to create a new list
-Route::get('/lists/create', [ListsController::class, 'create'])->name('lists.create');
-
-// Handle the form submission to create a new list
-Route::post('/lists', [ListsController::class, 'store'])->name('lists.store');
-
-// Display a list's details and allow the user to add libraries to it
-Route::get('/lists/{list}', [ListsController::class, 'show'])->name('lists.show');
-Route::put('/lists/{list}', [ListsController::class, 'update'])->name('lists.update');
 
