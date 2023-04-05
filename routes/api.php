@@ -3,6 +3,7 @@
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ListsController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/api-register', [ UserController::class, 'register'])->name('api-register');
+//Route::post('/api-login', [ UserController::class, 'login'])->name('api-login');
 
 Route::get('/wishlists', [WishListsController::class, 'index']);
 Route::get('/wishlists/{wishList}', [WishListsController::class, 'show']);

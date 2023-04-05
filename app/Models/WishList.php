@@ -11,7 +11,7 @@ class WishList extends Model
 
     protected $table = 'wish_lists';
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'user_id'];
 
     public function libraries()
     {

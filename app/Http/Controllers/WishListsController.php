@@ -9,14 +9,22 @@ class WishListsController extends Controller
 {
     public function index()
     {
-        $wishLists = WishList::with('libraries')->get();
+        $user_id = 1;//auth()->id();
+        $wishLists = Wishlist::where('user_id',$user_id)->with('libraries')->get();
 
         return response()->json($wishLists);
     }
 
     public function store(Request $request)
     {
-        $wishList = WishList::create($request->all());
+        $wishList = WishList::create([
+            'user_id' => 1,
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+       // $wishList->libraries()->associate($request->library_id);
+        $wishList->libraries()->attach($request->library_id);
 
         return response()->json($wishList);
     }
