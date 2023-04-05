@@ -23,8 +23,8 @@ class WishListsController extends Controller
             'description' => $request->description
         ]);
 
-       // $wishList->libraries()->associate($request->library_id);
-        $wishList->libraries()->attach($request->library_id);
+        $libraries = $request->input('library_id', []);
+        $wishList->libraries()->attach($libraries);
 
         return response()->json($wishList);
     }
