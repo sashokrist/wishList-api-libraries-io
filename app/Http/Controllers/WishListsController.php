@@ -17,11 +17,7 @@ class WishListsController extends Controller
 
     public function store(Request $request)
     {
-        $wishList = WishList::create([
-            'user_id' => 1,
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
+        $wishList = Wishlist::create($request->all());
 
         $libraries = $request->input('library_id', []);
         $wishList->libraries()->attach($libraries);
