@@ -9,10 +9,15 @@ class Library extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'url'];
+    protected $fillable = ['name', 'description', 'url', 'user_id'];
 
     public function wishLists()
     {
         return $this->belongsToMany(WishList::class)->withTimestamps();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
