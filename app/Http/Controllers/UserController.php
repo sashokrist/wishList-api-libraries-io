@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    public function storeUser(Request $request)
+    {
+        $user = User::create($request->all());
+
+        return response()->json($user);
+    }
+
     public function register(Request $request)
     {
         $user = $request->validate([
@@ -23,26 +30,22 @@ class UserController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        return redirect()->route('login')->with('success', 'You are registered.');
-    }
+        $credentials = $request->only($this->username(), 'password');
+        $user = \Illuminate\Foundation\Auth\User::where($this->username(), $credentials[$this->username()])->first();
 
-//    public function login(Request $request)
-//    {
-//        $data = $request->validate([
-//            'email' => 'email|required',
-//            'password' => 'required'
-//        ]);
-//
-//        if (!auth()->attempt($data)) {
-//            return response(['error_message' => 'Incorrect Details.
-//            Please try again']);
-//        }
-//
-//       // $token = auth()->user()->createToken('API Token')->accessToken;
-//
-//        return redirect()->route('home');
-//
-//    }
+        if (!$user || !$user->is_active) {
+            session()->flash('error', 'Account is deactivated');
+            return redirect()->back()->withInput();
+        }
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->intended('register');
+        } else {
+            session()->flash('error', 'Invalid credentials');
+            return redirect()->back()->withInput();
+        }
+    }
     public function deactivateAccount()
     {
         $user = Auth::user();

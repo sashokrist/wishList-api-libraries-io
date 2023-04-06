@@ -9,7 +9,7 @@ class WishListsController extends Controller
 {
     public function index()
     {
-        $user_id = 1;//auth()->id();
+        $user_id = 4;//auth()->id();
         $wishLists = Wishlist::where('user_id',$user_id)->with('libraries')->get();
 
         return response()->json($wishLists);

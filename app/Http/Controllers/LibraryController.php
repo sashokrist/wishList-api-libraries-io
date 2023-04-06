@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Library;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LibraryController extends Controller
 {
     public function index()
     {
-        $user_id = 1;//auth()->id();
+        $user_id = 4;//auth()->id();
         $libraries = Library::where('user_id',$user_id)->with('wishLists')->get();
 
         return response()->json($libraries);
