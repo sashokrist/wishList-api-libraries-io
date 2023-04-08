@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged as ') }} {{ auth()->user()->name }}
+                    {{ __('You are logged as ') }} {{ auth('api')->user()->name }}
                         <form action="{{ route('deactivate-account') }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-danger">Deactivate Account</button>

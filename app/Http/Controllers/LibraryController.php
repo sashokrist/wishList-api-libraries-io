@@ -10,7 +10,7 @@ class LibraryController extends Controller
 {
     public function index()
     {
-        $user_id = 4;//auth()->id();
+        $user_id = auth('api')->user()->id;//auth()->id();
         $libraries = Library::where('user_id',$user_id)->with('wishLists')->get();
 
         return response()->json($libraries);

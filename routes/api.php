@@ -19,24 +19,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/wishlists', [WishListsController::class, 'index']);
+    Route::get('/wishlists/{wishList}', [WishListsController::class, 'show']);
+    Route::post('/wishlists', [WishListsController::class, 'store']);
+    Route::put('/wishlists/{wishList}', [WishListsController::class, 'update']);
+    Route::delete('/wishlists/{wishList}', [WishListsController::class, 'destroy']);
+    Route::get('/libraries', [LibraryController::class, 'index']);
+    Route::get('/libraries/{library}', [LibraryController::class, 'show']);
+    Route::post('/libraries', [LibraryController::class, 'store']);
+    Route::put('/libraries/{library}', [LibraryController::class, 'update']);
+    Route::delete('/libraries/{library}', [LibraryController::class, 'destroy']);
 });
 
 //Route::post('/api-register', [ UserController::class, 'register'])->name('api-register');
 //Route::post('/storeUser', [LibraryController::class, 'storeUser'])->name('storeUser');
 Route::post('/storeUser', [UserController::class, 'storeUser'])->name('storeUser');
+Route::get('/home', [UserController::class, 'deactivateAccount'])->name('home');
 //Route::post('/api-login', [ UserController::class, 'login'])->name('api-login');
 
-Route::get('/wishlists', [WishListsController::class, 'index']);
-Route::get('/wishlists/{wishList}', [WishListsController::class, 'show']);
-Route::post('/wishlists', [WishListsController::class, 'store']);
-Route::put('/wishlists/{wishList}', [WishListsController::class, 'update']);
-Route::delete('/wishlists/{wishList}', [WishListsController::class, 'destroy']);
-Route::get('/libraries', [LibraryController::class, 'index']);
-Route::get('/libraries/{library}', [LibraryController::class, 'show']);
-Route::post('/libraries', [LibraryController::class, 'store']);
-Route::put('/libraries/{library}', [LibraryController::class, 'update']);
-Route::delete('/libraries/{library}', [LibraryController::class, 'destroy']);
+
 
 Route::get('/packages', [PackageController::class, 'show']);
